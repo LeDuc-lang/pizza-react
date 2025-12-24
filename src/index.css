@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #e63946;
+  --secondary-color: #f4a261;
+  --dark-bg: #1d3557;
+  --light-bg: #f1faee;
+  --text-dark: #264653;
+  --text-light: #ffffff;
+  --border-radius: 12px;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Navbar */
+nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+nav a {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: var(--primary-color);
+}
+
+/* Titre principal */
+h1 {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  color: var(--text-dark);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+/* Liste de pizzas */
+ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+li {
+  background: white;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+li:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+li strong {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+/* Contrôles de quantité */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.quantity-controls button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.quantity-controls input {
+  width: 60px;
+  text-align: center;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Boutons */
+button {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: var(--shadow);
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Bouton Commander principal */
+.commander-btn {
+  display: block;
+  margin: 2rem auto;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* Panier */
+.panier-container {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-top: 2rem;
+}
+
+.panier-container h1 {
+  color: var(--text-dark);
+  font-size: 2rem;
+  text-shadow: none;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.panier-container ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.panier-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--light-bg);
+  border-radius: 8px;
+}
+
+.panier-item-info {
+  flex: 1;
+}
+
+.panier-item-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.panier-total {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #e0e0e0;
+  text-align: right;
+}
+
+.panier-total h2 {
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+.panier-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+}
+
+/* Badge panier dans navbar */
+.cart-badge {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  ul {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+li, .panier-container {
+  animation: fadeIn 0.5s ease-out;
+}
