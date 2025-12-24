@@ -22,6 +22,5 @@ createRoot(document.getElementById("root")).render(
         <ChatbotButton />
       </>
     </StoreProvider>
-    ,
   </StrictMode>
 );

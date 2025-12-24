@@ -1,8 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
-import { sendMessageToOllama } from '../services/chat_service.js';
+// src/components/chatWindow.jsx
+import { useState, useRef, useEffect, useContext } from 'react';
+import { sendMessageWithContext } from '../services/chat_service.js';
+import { StoreContext } from '../store/store_panier.jsx';
 import '../styles/chatbot.css';
 
 export default function ChatWindow({ onClose }) {
+  const { state } = useContext(StoreContext);
   const [messages, setMessages] = useState([
     { role: 'assistant', content: '👋 Bonjour! Je peux vous aider à choisir une pizza!' }
   ]);
@@ -28,7 +31,8 @@ export default function ChatWindow({ onClose }) {
     setIsLoading(true);
 
     try {
-      const response = await sendMessageToOllama(userMessage);
+      // Passer le contexte des pizzas disponibles
+      const response = await sendMessageWithContext(userMessage, state.pizzas);
       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
     } catch (error) {
       setMessages(prev => [...prev, { 

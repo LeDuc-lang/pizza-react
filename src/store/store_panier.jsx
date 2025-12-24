@@ -1,22 +1,30 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
+import { fetchPizzas } from "../services/pizza_service";
 
 export const StoreContext = createContext();
 
 const initialState = {
-  pizzas: [
-    { name: "Margherita", price: 8.99 },
-    { name: "Pepperoni", price: 9.99 },
-    { name: "Hawaii", price: 10.99 },
-    { name: "Salami", price: 9.49 },
-    { name: "Funghi", price: 8.49 },
-    { name: "Tonno", price: 10.49 },
-    { name: "Quattro Formaggi", price: 11.99 }
-  ],
-  panier: []
+  pizzas: [],
+  panier: [],
+  loading: true,
+  error: null,
 };
 
 function reducer(state, action) {
   switch (action.type) {
+    case "SET_PIZZAS":
+      return {
+        ...state,
+        pizzas: action.payload,
+        loading: false,
+        error: null,
+      };
+    case "SET_ERROR":
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
     case "ADD_TO_CART":
       return {
         ...state,
@@ -48,6 +56,20 @@ function reducer(state, action) {
 
 export function StoreProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // Charger les pizzas au montage du composant
+  useEffect(() => {
+    async function loadPizzas() {
+      try {
+        const pizzas = await fetchPizzas();
+        dispatch({ type: "SET_PIZZAS", payload: pizzas });
+      } catch (error) {
+        dispatch({ type: "SET_ERROR", payload: error.message });
+      }
+    }
+    
+    loadPizzas();
+  }, []);
 
   // Calculer le total
   const getTotal = () => {
